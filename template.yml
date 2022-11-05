@@ -2,10 +2,6 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Launch EC2 instance with the latest Ubuntu AMI
 
 Parameters:
-    KeyPair:
-        Description: Amazon EC2 Key Pair used to ssh to the cluster nodes
-        Type: "AWS::EC2::KeyPair::KeyName"
-        Default: 'lab'
     InstanceType:
         Type: String
         Default: t2.medium
@@ -20,9 +16,9 @@ Resources:
     MyInstance:
         Type: AWS::EC2::Instance
         Properties:
-            ImageId: ami-097a2df4ac947655f
+            ImageId: ami-08c40ec9ead489470
             InstanceType: !Ref InstanceType
-            KeyName: !Ref KeyPair
+            KeyName: lab
             SecurityGroupIds:
                 - !Ref MyBasicSecurityGroup
 
