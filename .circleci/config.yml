@@ -46,7 +46,7 @@ jobs:
         - run:
             name: Configure server
             command: |
-              ansible-playbook -i 35.175.243.891 main-remote.yml               
+              ansible-playbook -i 35.175.243.89 main-remote.yml               
   # Sequential workflow
 workflows:
   my_workflow:
