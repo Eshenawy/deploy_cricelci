@@ -61,7 +61,7 @@ jobs:
         - run:
            name: smoke test
            command: |
-             URL="http://ec2-54-221-161-1121.compute-1.amazonaws.com:3000/"
+             URL="http://ec2-54-221-161-112.compute-1.amazonaws.com:3000/"
              # Test if website exists
              if curl -s --head ${URL} 
              then
