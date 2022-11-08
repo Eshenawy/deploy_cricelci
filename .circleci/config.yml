@@ -40,7 +40,7 @@ jobs:
               --query "Reservations[*].Instances[*].[PublicDnsName]" \
               --filters "Name=tag:Project,Values=udacity" \
               --region us-east-1 \
-              --output text >> inventory
+              --output text > inventory
               
         - destroy_environment
  configure_infrastructure: 
