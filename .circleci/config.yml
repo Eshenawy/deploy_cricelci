@@ -41,8 +41,7 @@ jobs:
               --filters "Name=tag:Project,Values=udacity" \
               --region us-east-1 \
               --output text > inventory
-        - run: |
-          cat inventory
+        - run: cat inventory
           
               
         - destroy_environment
