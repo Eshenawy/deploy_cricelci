@@ -34,6 +34,7 @@ jobs:
                 --template-body file://template.yml \
                 --region us-east-1     
         - destroy_environment
+        
  configure_infrastructure: 
       docker:
         - image: cimg/python:3.11.0
@@ -57,6 +58,7 @@ jobs:
         - image: alpine:latest
       steps:
         - run: apk add --update curl
+        - run: apk add --no-cache aws-cli
         - run:
            name: smoke test
            command: |
