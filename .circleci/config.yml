@@ -31,7 +31,8 @@ jobs:
               aws cloudformation create-stack \
                 --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
                 --template-body file://template.yml \
-                --region us-east-1
+                --region us-east-1 \
+                --output text >> inventory
         - run:
             name : add DNS to inventory
             command: |
