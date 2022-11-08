@@ -22,6 +22,9 @@ jobs:
         - image: amazon/aws-cli
       steps:
         - checkout
+        - add_ssh_keys:
+            fingerprints: 
+              - "2c:23:16:05:7b:d4:ae:55:d7:7c:ad:93:bc:ad:d0:38" # You can get this ID in the section where you registered the SSH Key
         - run:
             name: Create Cloudformation Stack
             command: |
@@ -29,6 +32,14 @@ jobs:
                 --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
                 --template-body file://template.yml \
                 --region us-east-1
+        - run:
+            name : add DNS to inventory
+            command: |
+              aws ec2 describe-instances \
+              --query "Reservations[*].Instances[*].[PublicDnsName]" \
+              --filters "Name=tag:Project,Values=udacity" \
+              --region us-east-1
+              
         - destroy_environment
  configure_infrastructure: 
       docker:
