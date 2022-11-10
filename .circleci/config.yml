@@ -87,8 +87,29 @@ jobs:
              --region us-east-1 
         
        # Uncomment the step below if yoou wish to upload all contents of the current directory to the S3 bucket
-        - run: aws s3 sync . s3://mybucket1-udam --delete       
+        - run: aws s3 sync . s3://mybucket-${CIRCLE_WORKFLOW_ID:0:7} --delete       
   # Sequential workflow
+  
+ get_last_deployment_id:
+      docker:
+        - image: amazon/aws-cli
+      steps:
+        - checkout
+        - run: yum install -y tar gzip
+        - run:
+            name: Fetch and save the old pipeline ID (bucket name) responsible for the last release.
+            command: |
+            
+              aws s3api list-buckets \
+              --query "Buckets[?Name=='mybucket-${CIRCLE_WORKFLOW_ID:0:7}'].Name" \
+              --region=us-east-1 \
+              --no-paginate --output text > ~/textfile.txt
+              
+        - persist_to_workspace:
+            root: ~/
+            paths: 
+              - textfile.txt 
+ 
 workflows:
   my_workflow:
       jobs:
@@ -102,3 +123,7 @@ workflows:
         - create_and_deploy_front_end:  
             requires:
               - smoke_test
+        - get_last_deployment_id
+             requires:
+              - create_and_deploy_front_end
+        
