@@ -123,7 +123,7 @@ workflows:
         - create_and_deploy_front_end:  
             requires:
               - smoke_test
-        - get_last_deployment_id
+        - get_last_deployment_id:
              requires:
               - create_and_deploy_front_end
         
