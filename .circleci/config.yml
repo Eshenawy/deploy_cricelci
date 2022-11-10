@@ -83,7 +83,7 @@ jobs:
              aws cloudformation create-stack \
              --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7} \
              --template-body file://bucket.yml \
-             --parameters ParameterKey=PipelineID,ParameterValue=mybucket-${CIRCLE_WORKFLOW_ID:0:7} \
+             --parameters ParameterKey=MyBucketName,ParameterValue=mybucket-${CIRCLE_WORKFLOW_ID:0:7} \
              --region us-east-1 
         
        # Uncomment the step below if yoou wish to upload all contents of the current directory to the S3 bucket
