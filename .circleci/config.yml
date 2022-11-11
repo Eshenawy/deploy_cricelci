@@ -129,7 +129,7 @@ jobs:
               --region us-east-1
         - run:
            command: |
-               sleep 12m              
+               sleep 12m           
  
 workflows:
   my_workflow:
@@ -147,4 +147,6 @@ workflows:
         - get_last_deployment_id:
              requires:
               - create_and_deploy_front_end
-        
+        - promote_to_production:
+             requires:
+              - get_last_deployment_id        
