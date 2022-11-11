@@ -86,7 +86,7 @@ jobs:
              --parameters ParameterKey=MyBucketName,ParameterValue=mybucket-${CIRCLE_WORKFLOW_ID:0:7} \
              --region us-east-1
        # Uncomment the step below if yoou wish to upload all contents of the current directory to the S3 bucket
-        - run: sleep(120)
+        - run: sleep('60')
         - run: aws s3 sync . s3://mybucket-e500e5a --delete       
   # Sequential workflow
   
